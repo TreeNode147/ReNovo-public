@@ -1,0 +1,79 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2022 Melih Yilmaz.
+# Based on Casanovo configuration; modified for ReNovo experiments.
+# See LICENSE and licenses/ at the repository root.
+
+# Important Parameter
+min_peptide_len: 5
+max_length: 65
+train_from_scratch: False
+calculate_precision: True
+
+n_beams: 5
+random_seed: 454
+model_save_folder_path: "saved_model"
+
+# PSM Data
+precursor_mass_tol: 50  # ppm
+isotope_error_range: [0, 1]
+n_peaks: 150
+min_mz: 50.0
+max_mz: 2500.0
+min_intensity: 0.01
+remove_precursor_tol: 2.0  # Da
+max_charge: 10
+
+# Model Arch
+train_batch_size: 32
+predict_batch_size: 1024
+dim_model: 512
+n_head: 8
+dim_feedforward: 1024
+n_layers: 9
+dropout: 0.0
+dim_intensity:
+warmup_iters: 100_000
+max_iters: 600_000
+learning_rate: 5e-4
+weight_decay: 1e-5
+train_label_smoothing: 0.01
+top_match: 1
+max_epochs: 30
+num_sanity_val_steps: 0
+save_top_k: 5
+val_check_interval: 50_000
+
+# Device
+accelerator: "auto"
+devices:
+
+# Log
+n_log: 1
+tb_summarywriter:
+
+# AMINO ACID AND MODIFICATION VOCABULARY
+residues:
+  "G": 57.021464              
+  "A": 71.037114
+  "S": 87.032028
+  "P": 97.052764
+  "V": 99.068414
+  "T": 101.047670
+  "C(+57.02)": 160.030649 # 103.009185 + 57.021464
+  "L": 113.084064
+  "I": 113.084064
+  "N": 114.042927
+  "D": 115.026943
+  "Q": 128.058578
+  "K": 128.094963
+  "E": 129.042593
+  "M": 131.040485
+  "H": 137.058912
+  "F": 147.068414
+  "R": 156.101111
+  "Y": 163.063329
+  "W": 186.079313
+  # Amino acid modifications.
+  "M(+15.99)": 147.035400    # Met oxidation:   131.040485 + 15.994915
+  "N(+.98)": 115.026943     # Asn deamidation: 114.042927 +  0.984016
+  "Q(+.98)": 129.042594     # Gln deamidation: 128.058578 +  0.984016

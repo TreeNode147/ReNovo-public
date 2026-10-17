@@ -1,0 +1,13 @@
+# Large reproduction assets are distributed separately from source code.
+/dataset/
+/saved_model/
+/datastore/
+/reference_datastore/
+
+# Generated logs, temporary spectrum indexes, and Python caches.
+/logs/
+/tmp/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
